@@ -15,17 +15,20 @@ h1{
     font-weight: 900;
     letter-spacing: 0.0rem;
     margin-bottom: 0rem;
-    color: #2b74ba;
-   
+    color: #333;  
 }
 h2{
     font-family: "Circular", Helvetica, Arial;
     margin-top: 0.1rem;
     text-align: center;
-    font-size: 1.0rem;
+    font-size: 0.9rem;
     font-weight: 800;
-    letter-spacing: 0.0rem;
+    letter-spacing: 0.22rem;
     color:#a02f20;
+}
+#academy{
+    color: #2b74ba;
+    font-size: 1.6rem;
 }
 #pickachu{
     width:20rem;
@@ -37,8 +40,8 @@ h2{
 }
 #outer-div{
     height: 6.6rem;
-    width: 28%;
-    margin-top: 0.4rem;
+    width: 31%;
+    margin-top: 0.2rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -64,13 +67,13 @@ h2{
     font-family: "Circular", Helvetica, Arial;
     font-weight: 600;
     height: 2.8rem;
-    color:white;
-    background-color: #2b74ba;
+    color: #333;
+    background-color:#ffcb05;
 }
 #btn-submit:hover{
 
-    color: #333;
-    background-color:#ffcb05;
+    color:white;
+    background-color: #2b74ba;
     cursor: pointer;
 
 }
