@@ -3,16 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopBarComponent } from './components/top-bar/top-bar.component';
-import { StartPageComponent } from './components/start-page/start-page.component';
-import { FooterBarComponent } from './components/footer-bar/footer-bar.component';
+import { AppHeaderComponent } from './components/app-header/app-header.component';
+import { AppStartPageComponent } from './components/app-start-page/app-start-page.component';
+import { AppFooterComponent } from './components/app-footer/app-footer.component';
+import { DisplayPokemonsComponent } from './components/display-pokemons/display-pokemons.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopBarComponent,
-    StartPageComponent,
-    FooterBarComponent,
+    AppHeaderComponent,
+    AppStartPageComponent,
+    AppFooterComponent,
+    DisplayPokemonsComponent
 
   ],
   imports: [
