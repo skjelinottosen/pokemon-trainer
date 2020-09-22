@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppStartPageComponent implements OnInit {
 
+  // Trainer object
+  trainer = {
+    name: ''
+  }
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  onSignUpClicked(){
+    // Stores the trainer name in local storage
+    localStorage.setItem("trainerName", this.trainer.name);
+  }
 }
