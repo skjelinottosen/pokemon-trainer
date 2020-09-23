@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
+import {Router} from '@angular/router';
+import { emit } from 'process';
+import { CommunicationService } from '../../services/CommunicationService/communication.service';
+import { Trainer } from '../../models/trainer'
 
 @Component({
   selector: 'app-start-page',
@@ -6,18 +10,56 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app-start-page.component.css']
 })
 export class AppStartPageComponent implements OnInit {
+public id;
+public name:'';
 
-  // Trainer object
-  trainer = {
-    name: ''
+  @Output() public getNameEvent = new EventEmitter();
+
+  constructor(private router: Router, private communicationService: CommunicationService) {}
+    
+  public newTrainer = new Trainer();
+
+    sendMessage(name): void {
+      // Sends message to subscribers via observable subject
+      this.communicationService.sendMessage(name);
   }
 
-  constructor() { }
+  clearMessages(): void {
+      // Clears messages
+      this.communicationService.clearMessages();
+}
 
   ngOnInit(): void {
   }
+
+  // Click event for sign up on start page
   onSignUpClicked(){
-    // Stores the trainer name in local storage
-    localStorage.setItem("trainerName", this.trainer.name);
+
+    // Generes random id in range 1000000 to 9999999
+    let randomId = this.randomId(1000000,9999999);
+    this.id = randomId.toString();
+
+    this.newTrainer.id = this.id
+    this.newTrainer.name=this.name;
+
+    // Stores the trainer id and name in local storage
+    localStorage.setItem("trainerId",  this.newTrainer.id);
+    localStorage.setItem("trainerName", this.newTrainer.name);
+
+    // Sends trainer object to app
+    this.sendMessage(this.newTrainer);
+    
+    // Redirects on event
+    this.redirect();
+  }
+
+  // Method redirect to pokemon page
+  redirect() {
+    this.router.navigate(['./pokemons']);
+  }
+
+   // Generates a random Id 
+   randomId(min, max) { 
+    return Math.floor(Math.random() * (max - min + 1) + min);
   }
 }

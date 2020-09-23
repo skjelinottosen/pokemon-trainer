@@ -34,7 +34,6 @@ h1{
     color: #333;
     background-color: #ffcb05;
     font-family: "Circular", Helvetica, Arial;
-    text-transform: uppercase;
     letter-spacing: 0.05rem;
     font-size: 1.4rem;
     font-weight: 900;
@@ -43,3 +42,46 @@ h1{
     padding: 0.6rem;
     padding-right: 0.8rem;   
 }
+
+#trainer-section-header{
+  width: 20%;
+  height:4.4rem;
+  position: absolute;
+  top:0.5rem;
+  left: 62rem;
+  flex-wrap: wrap;
+}
+
+p{
+  right:3rem;
+  font-size: 0.85rem;
+  font-family: "Circular", Helvetica, Arial;
+  color: #333;
+  letter-spacing: 0.0rem;
+  font-weight: 900;
+  z-index: 99;
+  margin-left: 0rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0rem;
+}
+#trainer{
+  font-size: 0.7rem;
+  font-family: "Circular", Helvetica, Arial;
+  color: white;
+  letter-spacing: 0.0rem;
+  font-weight: 900;
+  z-index: 99;
+}
+  #trainer-id{
+    margin-left: 0.2rem;
+  }
+
+#trainer-span{
+  font-weight: 800;
+  font-size: 0.7rem;
+  margin-right: 0.0rem;
+  letter-spacing: 0.01rem; 
+
+}
+
+
