@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
-import {Router} from '@angular/router';
 import { emit } from 'process';
 import { CommunicationService } from '../../services/CommunicationService/communication.service';
 import { Trainer } from '../../models/trainer'
@@ -15,7 +14,7 @@ public name:'';
 
   @Output() public getNameEvent = new EventEmitter();
 
-  constructor(private router: Router, private communicationService: CommunicationService) {}
+  constructor(private communicationService: CommunicationService) {}
     
   public newTrainer = new Trainer();
 
@@ -27,7 +26,7 @@ public name:'';
   clearMessages(): void {
       // Clears messages
       this.communicationService.clearMessages();
-}
+  }
 
   ngOnInit(): void {
   }
@@ -48,14 +47,6 @@ public name:'';
 
     // Sends trainer object to app
     this.sendMessage(this.newTrainer);
-    
-    // Redirects on event
-    this.redirect();
-  }
-
-  // Method redirect to pokemon page
-  redirect() {
-    this.router.navigate(['./pokemons']);
   }
 
    // Generates a random Id 
