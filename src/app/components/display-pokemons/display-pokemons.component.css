@@ -1,0 +1,53 @@
+#pokemon-preview-section{
+    margin-top: 0rem;
+    width:96%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card-preview{
+    width:12%;
+    margin: 0.3rem;
+    padding: 0rem;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1.3px solid #333;
+}
+    .card-preview:hover { 
+        cursor:pointer;
+        background-color: rgb(245, 245, 245);
+        border: 1.3px solid green;
+    }
+
+    .card-preview:hover h2{ 
+        background-color: green;
+        color: white;
+        cursor:pointer;
+    }
+    .card-preview:hover img{
+        opacity: 0.2;
+    }
+  
+ h2{
+    text-align: center;
+    color: #333;
+    background-color: #ffcb05;
+    font-family: "Circular", Helvetica, Arial;
+    text-transform: capitalize;
+    letter-spacing: 0.05rem;
+    font-size: 0.6rem;
+    font-weight: 900;
+    margin-top: 0.0rem;
+    margin-bottom: 0rem;
+    padding: 0.6rem;
+    padding-right: 0.8rem; 
+}
+.image-preview{
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  
+}

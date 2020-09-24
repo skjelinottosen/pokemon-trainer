@@ -9,8 +9,9 @@ import { Trainer } from '../../models/trainer'
   styleUrls: ['./app-start-page.component.css']
 })
 export class AppStartPageComponent implements OnInit {
-public id;
-public name:'';
+  // Input variables for traine robject
+  public id;
+  public name:'';
 
   @Output() public getNameEvent = new EventEmitter();
 
@@ -21,18 +22,18 @@ public name:'';
     sendMessage(name): void {
       // Sends message to subscribers via observable subject
       this.communicationService.sendMessage(name);
-  }
+    }
 
-  clearMessages(): void {
-      // Clears messages
-      this.communicationService.clearMessages();
-  }
+    clearMessages(): void {
+        // Clears messages
+        this.communicationService.clearMessages();
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  // Click event for sign up on start page
-  onSignUpClicked(){
+    // Click event for sign up on start page
+    onSignUpClicked(){
 
     // Generes random id in range 1000000 to 9999999
     let randomId = this.randomId(1000000,9999999);

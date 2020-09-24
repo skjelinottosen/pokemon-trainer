@@ -1,1 +1,6 @@
-<p>display-pokemons works!</p>
+<section id="pokemon-preview-section">
+    <section class="card-preview" *ngFor="let pokemon of pokemonData[0], let id = index">
+        <h2>{{pokemon.name}}</h2>
+        <img src="{{ imageUrl }}{{id+1}}.png" class="image-preview" />
+    </section>
+  </section> 
