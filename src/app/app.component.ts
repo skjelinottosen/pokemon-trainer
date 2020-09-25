@@ -42,10 +42,7 @@ export class AppComponent {
               this.id = message.text.id;
               if(this.authService.isSignedIn()){    
                 // Redirects on event
-                this.redirect();
-
-                // Reloads the page for getting the pokemon data
-                location.reload();
+                this.redirect();     
               }
               
           } else {

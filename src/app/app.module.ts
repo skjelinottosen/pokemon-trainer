@@ -10,6 +10,7 @@ import { AppStartPageComponent } from './components/app-start-page/app-start-pag
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { DisplayPokemonsComponent } from './components/display-pokemons/display-pokemons.component';
 import { DisplayPokemonDetailsComponent } from './components/display-pokemon-details/display-pokemon-details.component';
+import { DisplayPokemonCollectionComponent } from './components/display-pokemon-collection/display-pokemon-collection.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DisplayPokemonDetailsComponent } from './components/display-pokemon-det
     AppStartPageComponent,
     AppFooterComponent,
     DisplayPokemonsComponent,
-    DisplayPokemonDetailsComponent
+    DisplayPokemonDetailsComponent,
+    DisplayPokemonCollectionComponent
 
   ],
   imports: [

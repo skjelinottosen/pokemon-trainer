@@ -22,44 +22,54 @@ export class DisplayPokemonDetailsComponent implements OnInit {
   loaded = false;
 
   constructor( private router: Router, private communicationService: CommunicationService) {
-     // Subscribes to home component messages
-     this.subscription = this.communicationService.onMessage().subscribe(message => {
-      if (message) {      
-        // Stores Pokemon detail data in local storage
-        localStorage.setItem("pokemonDetailsUrl",  message.text[2]);
-        
-        // Stores response detail data respone from local storages
-        this.pokemonDetails = JSON.parse(localStorage.getItem("selectedPokemonDetails"));
-       this.pokemon.id = JSON.parse(localStorage.getItem("selectedPokemonId"));
-        // Gets the types
-        for(let i= 0; i<this.pokemonDetails['types'].length; i++){
-            this.pokemon.types[i] = this.pokemonDetails['types'][i]['type']['name'];
-        }
-        
-        this.pokemon.imageUrl = localStorage.getItem('selectedPokemonImageUrl');
-        // Gets the height
-        this.pokemon.height = this.pokemonDetails['height'];
-
-        // Gets the weight 
-        this.pokemon.weight = this.pokemonDetails['weight'];
-
-        // Gets the abilities
-        for(let i= 0; i<this.pokemonDetails['abilities'].length; i++){
-          this.pokemon.abilities[i] = this.pokemonDetails['abilities'][i]['ability']['name'];      
-        }
-
-        // Gets the moves
-        for(let i= 0; i<this.pokemonDetails['moves'].length; i++){
-          this.pokemon.moves[i] = this.pokemonDetails['moves'][i]['move']['name'];      
-        }  
     
-      } else {
+    // Stores response detail data respone from local storages
+    this.pokemonDetails = JSON.parse(localStorage.getItem("selectedPokemonDetails"));
+    this.pokemon.id = JSON.parse(localStorage.getItem("selectedPokemonId"));
+    // Gets the types
+    for(let i= 0; i<this.pokemonDetails['types'].length; i++){
+      this.pokemon.types[i] = this.pokemonDetails['types'][i]['type']['name'];
+    }
+    
+    this.pokemon.imageUrl = localStorage.getItem('selectedPokemonImageUrl');
+   
+    // Gets the height
+    this.pokemon.height = this.pokemonDetails['height'];
+    
+    // Gets the weight 
+    this.pokemon.weight = this.pokemonDetails['weight'];
+    
+    // Gets the abilities
+    for(let i= 0; i<this.pokemonDetails['abilities'].length; i++){
+      this.pokemon.abilities[i] = this.pokemonDetails['abilities'][i]['ability']['name'];      
+    }   
+    
+    // Gets the moves
+    for(let i= 0; i<this.pokemonDetails['moves'].length; i++){
+      this.pokemon.moves[i] = this.pokemonDetails['moves'][i]['move']['name'];      
+    }
+    console.log(this.pokemon.moves);  
+  
+    // Subscribes to home component messages
+    this.subscription = this.communicationService.onMessage().subscribe(message => {
+      if (message) {      
+      // Stores Pokemon detail data in local storage
+        localStorage.setItem("pokemonDetailsUrl",  message.text[2]);
+        } else {
           // Clear messages when empty message received
           this.pokemonData = [];
+        }
+        });
       }
-    });
-   }
+      
+   onCatchClicked(event){
 
+    let pokemonCollected = [];
+    pokemonCollected[0] = this.pokemonName;
+    pokemonCollected[1] = this.imageUrl;
+    localStorage.setItem("pokemonCollection",  JSON.stringify(pokemonCollected));
+     alert("You Caught " +this.pokemonName);
+   }
   ngOnInit(): void {
   
   }

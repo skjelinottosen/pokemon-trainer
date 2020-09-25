@@ -17,21 +17,22 @@ export class DisplayPokemonsComponent implements OnInit {
   subscription: Subscription;
 
   constructor( private router: Router, private communicationService: CommunicationService, private pokemonService: PokemonService) {
+     // Stores the pokemon data
+     this.pokemonData[0] = JSON.parse(localStorage.getItem("allPokemons"));
+
+     // Stores the url for the pokemon images
+     this.pokemonData[1] =  localStorage.getItem("pokemonImageUrl");
+     
+     // Updates imageUrl with the url for the images
+     this.imageUrl = this.pokemonData[1]; 
+   
+   
     // Subscribes to home component messages
     this.subscription = this.communicationService.onMessage().subscribe(message => {
       if (message) {
         // Stores the trainer id and name in local storage
         localStorage.setItem("allPokemons", JSON.stringify(message.text[0]));
-        localStorage.setItem("pokemonImageUrl",  message.text[1]);
-      
-        // Stores the pokemon data
-        this.pokemonData[0] = JSON.parse(localStorage.getItem("allPokemons"));
-
-        // Stores the url for the pokemon images
-        this.pokemonData[1] =  localStorage.getItem("pokemonImageUrl");
-        
-        // Updates imageUrl with the url for the images
-        this.imageUrl = this.pokemonData[1];    
+        localStorage.setItem("pokemonImageUrl",  message.text[1]);   
         
       } else {
           // Clear messages when empty message received

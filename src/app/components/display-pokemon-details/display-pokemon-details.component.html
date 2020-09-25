@@ -5,7 +5,7 @@
             <ul>    
                 <li>
                     <img  src="{{imageUrl}}" class="image-details" />   
-                    <button  id="btn-catch">Catch</button>      
+                    <button  id="btn-catch" (click)="onCatchClicked($event)">Catch</button>      
                 </li>
             </ul>
         </section>
@@ -48,8 +48,8 @@
         <section id="moves-section">
             <h2>Moves</h2>
             <ul>
-                <li *ngFor="let moves of pokemon.moves">
-                    <p>{{moves}}</p>
+                <li *ngFor="let move of pokemon.moves">
+                    <p>{{move}}</p>
                 </li>
             </ul>
         </section>
