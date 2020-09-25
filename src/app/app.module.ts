@@ -9,6 +9,7 @@ import { AppHeaderComponent } from './components/app-header/app-header.component
 import { AppStartPageComponent } from './components/app-start-page/app-start-page.component';
 import { AppFooterComponent } from './components/app-footer/app-footer.component';
 import { DisplayPokemonsComponent } from './components/display-pokemons/display-pokemons.component';
+import { DisplayPokemonDetailsComponent } from './components/display-pokemon-details/display-pokemon-details.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { DisplayPokemonsComponent } from './components/display-pokemons/display-
     AppHeaderComponent,
     AppStartPageComponent,
     AppFooterComponent,
-    DisplayPokemonsComponent
+    DisplayPokemonsComponent,
+    DisplayPokemonDetailsComponent
 
   ],
   imports: [

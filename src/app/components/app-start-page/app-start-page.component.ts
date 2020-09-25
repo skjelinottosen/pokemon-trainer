@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, } from '@angular/core';
 import { emit } from 'process';
 import { CommunicationService } from '../../services/CommunicationService/communication.service';
-import { Trainer } from '../../models/trainer'
+import { Trainer } from '../../models/trainer';
 
 @Component({
   selector: 'app-start-page',
@@ -17,7 +17,7 @@ export class AppStartPageComponent implements OnInit {
 
   constructor(private communicationService: CommunicationService) {}
     
-  public newTrainer = new Trainer();
+  public trainer = new Trainer();
 
     sendMessage(name): void {
       // Sends message to subscribers via observable subject
@@ -39,15 +39,15 @@ export class AppStartPageComponent implements OnInit {
     let randomId = this.randomId(1000000,9999999);
     this.id = randomId.toString();
 
-    this.newTrainer.id = this.id
-    this.newTrainer.name=this.name;
+    this.trainer.id = this.id
+    this.trainer.name=this.name;
 
     // Stores the trainer id and name in local storage
-    localStorage.setItem("trainerId",  this.newTrainer.id);
-    localStorage.setItem("trainerName", this.newTrainer.name);
+    localStorage.setItem("trainerId",  this.trainer.id);
+    localStorage.setItem("trainerName", this.trainer.name);
 
     // Sends trainer object to app
-    this.sendMessage(this.newTrainer);
+    this.sendMessage(this.trainer);
   }
 
    // Generates a random Id 

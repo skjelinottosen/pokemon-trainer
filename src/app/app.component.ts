@@ -70,6 +70,10 @@ export class AppComponent {
     return this.pokemonService.getPokemonImageUrl()
   }
 
+  getPokemonDetailsUrl() : String{
+    return this.pokemonService.getPokemonDetailsUrl();
+  }
+
   // Method redirect to pokemon page
   redirect() {
     this.router.navigate(['./pokemons']);
@@ -79,20 +83,27 @@ export class AppComponent {
 
     // Gets the pokemon data from the api
     this.pokemonService.getAllPokemons().subscribe((result) => {
-    this.pokemonCollection = result['results']; 
+      this.pokemonCollection = result['results']; 
 
-    // Get the image base url
-    let pokemonImageUrl = this.getPokemonImageUrl();
+      // Get the image base url
+      let pokemonImageUrl = this.getPokemonImageUrl();
+
+      let pokemonDetailsUrl = this.getPokemonDetailsUrl();
+      
+      // Creates a array 
+      let pokemonData = [];
+
+      // Adds pokemon data to the array
+      pokemonData[0] = this.pokemonCollection;
     
-    // Creates a array 
-    let pokemonData = [];
-
-    // Adds pokemon data to the array
-    pokemonData[0] = this.pokemonCollection;
-    // Adds images base url to the array
-    pokemonData[1] = pokemonImageUrl
-    // Sends array to other components
-    this.sendMessage(pokemonData);
+      // Adds images base url to the array
+      pokemonData[1] = pokemonImageUrl
+    
+      // Add details base url to the array
+      pokemonData[2] = pokemonDetailsUrl;
+    
+      // Sends array to other components
+      this.sendMessage(pokemonData);
     });
   }
 }

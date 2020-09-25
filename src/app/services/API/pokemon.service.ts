@@ -11,6 +11,7 @@ export class PokemonService {
   
   public allPokemonUrl = 'https://pokeapi.co/api/v2/pokemon?limit=807';
   public pokemonImageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
+  public pokemonDetailsUrl= 'https://pokeapi.co/api/v2/pokemon/';
 
   constructor(private http: HttpClient) { }
 
@@ -20,5 +21,14 @@ export class PokemonService {
   
   getPokemonImageUrl() : string {
     return this.pokemonImageUrl
+  }
+
+  getPokemonDetailsUrl() : string{
+    return this.pokemonDetailsUrl;
+  }
+
+  getPokemonById(id){
+    return this.http.get(this.pokemonDetailsUrl+id);
+
   }
 }

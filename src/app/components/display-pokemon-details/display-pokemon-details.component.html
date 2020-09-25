@@ -1,0 +1,60 @@
+<main class="pokemon-selected-section">
+    <section id="details-section">
+        <section id="card"> 
+            <h2> A wild Pokémon</h2>  
+            <ul>    
+                <li>
+                    <img  src="{{imageUrl}}" class="image-details" />   
+                    <button  id="btn-catch">Catch</button>      
+                </li>
+            </ul>
+        </section>
+        <section id="basic-section">
+            <h2>Basic</h2>   
+            <ul>  
+                <li>
+                    <h3>No</h3>
+                    <p> {{pokemon.id}}</p>
+                </li> 
+                <li>
+                    <h3>Name</h3>
+                    <p>{{pokemonName}}</p>
+                </li>       
+                <li *ngFor="let type of pokemon.types">
+                    <h3>Types</h3>
+                    <p>{{type}}</p>
+                </li>  
+            </ul>  
+        </section>
+        <section  id="profile-section">
+            <h2>Profile</h2>          
+            <ul>
+                <li>
+                    <h3>Height</h3>
+                    <p> {{pokemon.height}} ft</p>
+                </li>
+                <li>
+                    <h3>Weight</h3>
+                    <p> {{pokemon.weight}} kg</p>
+                </li>
+            </ul>  
+            <ul>
+                <li *ngFor="let ability of pokemon.abilities">
+                    <h3>Abilities</h3>
+                    <p>{{ability}}</p>
+                </li>
+            </ul>         
+        </section>
+        <section id="moves-section">
+            <h2>Moves</h2>
+            <ul>
+                <li *ngFor="let moves of pokemon.moves">
+                    <p>{{moves}}</p>
+                </li>
+            </ul>
+        </section>
+    </section>
+    <section id="btn-sections">
+        <button  id="btn-allPokemons">All Pokémons</button>    
+    </section>
+</main>
