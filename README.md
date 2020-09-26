@@ -1,4 +1,10 @@
 # PokemonTrainer
+Pokémon Trainer is a Pokémon application written in Agular.
+After registration, the user can explore the world of Pokémon by viewing an archive of various Pokémon. Each Pokémon can be clicked on to get more information, such as type, height, weight, abilities and moves.
+The user can also catch pokemons to store them in a personal collection. 
+The data used in the application  is retrieved from a free Pokémon API (https://pokeapi.co).
+
+Have fun!
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
 
