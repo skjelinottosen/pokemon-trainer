@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import { AuthService } from '../../services/Auth/auth.service'
 
 @Component({
   selector: 'app-display-pokemon-collection',
@@ -10,9 +11,15 @@ export class DisplayPokemonCollectionComponent implements OnInit {
   imageUrl:""
   pokemonData: any[] = [];
 
-  constructor(private router: Router) {
-    // Stores the pokemon data
-    this.pokemonData = JSON.parse(localStorage.getItem("pokemonCollection"));
+  constructor(private router: Router, private authService: AuthService) {
+    
+    if(!this.authService.isSignedIn()){ 
+      this.redirect('./start-page');
+    }
+    else{
+        // Stores the pokemon data
+        this.pokemonData = JSON.parse(localStorage.getItem("pokemonCollection"));
+    }
    }
 
    onAllPokemonsClicked($event){
@@ -22,6 +29,11 @@ export class DisplayPokemonCollectionComponent implements OnInit {
    // Method redirect to pokemon-previw page
    redirectToPreview() {
     this.router.navigate(['./preview']);
+  }
+
+  // Method redirect to pokemon-details page
+  redirect(path) {
+    this.router.navigate([path]);
   }
 
   ngOnInit(): void {

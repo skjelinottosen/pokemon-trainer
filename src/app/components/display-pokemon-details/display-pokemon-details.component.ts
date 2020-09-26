@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommunicationService } from '../../services/CommunicationService/communication.service';
+import { AuthService } from '../../services/Auth/auth.service'
 import { Pokemon } from '../../models/pokemon';
 import { PokemonCollection } from '../../models/pokemonCollection';
 
@@ -24,8 +25,12 @@ export class DisplayPokemonDetailsComponent implements OnInit {
   subscription: Subscription;
   loaded = false;
 
-  constructor( private router: Router, private communicationService: CommunicationService) {
+  constructor( private router: Router, private communicationService: CommunicationService, private authService: AuthService) {
     
+    if(!this.authService.isSignedIn()){ 
+      this.redirect('./start-page');
+    }
+    else{
     // Stores pokemon detail data respone from local storages
     this.pokemonDetails = JSON.parse(localStorage.getItem("selectedPokemonDetails"));
     this.pokemon.id = JSON.parse(localStorage.getItem("selectedPokemonId"));
@@ -74,6 +79,7 @@ export class DisplayPokemonDetailsComponent implements OnInit {
         }
       });
     }
+  }
 
    onCatchClicked(event){
 
@@ -91,24 +97,18 @@ export class DisplayPokemonDetailsComponent implements OnInit {
   }
 
   onAllPokemonsClicked($event){
-    this.redirectToPreview();
+    this.redirect('./preview');
   }
 
   onCollectionClicked($event){
-    this.redirectTocollection();
+    this.redirect('./collection');
   }
 
-   // Method redirect to pokemon-previw page
-   redirectToPreview() {
-    this.router.navigate(['./preview']);
-  }
-
-  // Method redirect to pokemon-previw page
-  redirectTocollection() {
-    this.router.navigate(['./collection']);
+   // Method redirect to pokemon-details page
+   redirect(path) {
+    this.router.navigate([path]);
   }
   
   ngOnInit(): void {
-  
   }
 }

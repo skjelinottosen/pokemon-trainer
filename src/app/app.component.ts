@@ -30,6 +30,8 @@ export class AppComponent {
   public pokemonImageUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
   
   constructor(private router: Router, private communicationService: CommunicationService, private authService: AuthService, private pokemonService: PokemonService) {
+    const path = window.location.pathname.substring(1);
+   
     if(!this.authService.isSignedIn()){ 
       //Subscribes to home component messages
       this.subscription = this.communicationService.onMessage().subscribe(message => {
@@ -37,8 +39,9 @@ export class AppComponent {
              this.name = message.text.name;
              this.id = message.text.id;
              if(this.authService.isSignedIn()){    
-               // Redirects on event
-               this.redirect();     
+              
+              // Redirects to preview
+               this.redirect('preview');     
              }
              
          } else {
@@ -46,7 +49,19 @@ export class AppComponent {
              this.messages = [];
          }    
      });     
-    }   
+    }  
+    else{
+      if(path==="" || path=='start-page'){
+        
+        // Redirects to preview
+        this.redirect('preview');  
+      }
+      else{
+     
+        // Redirects to chosen path
+        this.redirect(path);  
+      }       
+    } 
   } 
 
   sendMessage(name): void {
@@ -68,8 +83,8 @@ export class AppComponent {
   }
 
   // Method redirect to pokemon page
-  redirect() {
-    this.router.navigate(['./preview']);
+  redirect(path) {
+    this.router.navigate([path]);
   }
 
   async ngOnInit(){
