@@ -75,6 +75,13 @@ export class DisplayPokemonsComponent implements OnInit {
     this.redirect('./details');
     
   }
+  onAllPokemonsClicked($event){
+    this.redirect('./preview');
+  }
+
+  onCollectionClicked($event){
+    this.redirect('./collection');
+  }
   
   // Method redirect to pokemon-details page
   redirect(path) {

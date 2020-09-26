@@ -4,16 +4,18 @@ main{
     height:80vh;
     margin-left: auto;
     margin-right: auto;
-    overflow:hidden;  
 }
 
 .pokemon-preview-section{
     margin-top: 0rem;
+    margin-bottom: 0.5rem;
     width:96%;
+    height:74vh;
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-wrap: wrap;
+    overflow:scroll; 
 }
 
 .card-preview{
@@ -97,8 +99,69 @@ main{
         visibility: visible;
        
     }
-    .btn-preview-catch:hover{
-            background-color: green;
-            color: white;
-            cursor:pointer;
-        }
+
+.btn-preview-catch:hover{
+    background-color: green;
+    color: white;
+    cursor:pointer;
+}
+
+#btn-sections{
+    width: 50.4%;
+    margin-left: 1.7rem;
+    display: flex;
+    justify-content:flex-start;
+}
+    
+#btn-all-pokemons{
+    width:40%;
+    border: none;        
+    padding: 0;
+    margin-top: 0.0rem;
+    margin-right: 0.2rem;
+    font-family: "Circular", Helvetica, Arial;
+    font-weight: 600;
+    height: 2.4rem;
+    color: #333;
+    background-color:#ffcb05
+}
+    #btn-all-pokemons:hover{
+        background-color: gray;
+        color: white;
+        cursor:pointer;
+    }
+#btn-pokemon-collection{
+    width:40%;
+    border: none;        
+    padding: 0;
+    margin-top: 0.0rem;
+    font-family: "Circular", Helvetica, Arial;
+    font-weight: 600;
+    height: 2.4rem;
+    color: white;
+    background-color:#2b74ba
+}
+    #btn-pokemon-collection:hover{
+        background-color: gray;
+        color: white;
+        cursor:pointer;
+    }
+    
+#btn-catch{
+    width:80%;
+    border: none;
+    padding: 0;
+    margin-top: 0.0rem;
+    font-family: "Circular", Helvetica, Arial;
+    font-weight: 600;
+    height: 2rem;
+    color: white;
+    background-color:red;
+}
+    #btn-catch:hover{
+        background-color: green;
+        color: white;
+        cursor:pointer;
+    }
+    
+        

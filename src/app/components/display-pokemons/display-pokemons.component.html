@@ -1,8 +1,13 @@
-<section class="pokemon-preview-section">
-    <section  id="{{id}}" class="card-preview" (click)="onPreviewClicked($event)" *ngFor="let pokemon of pokemonData[0], let id = index">
-        <h2 id="{{id}}"> {{pokemon.name}}</h2>
-        <img  id="{{id}}"src="{{imageUrl}}{{id+1}}.png" class="image-preview" />
+<main >
+    <section class="pokemon-preview-section">
+        <section  id="{{id}}" class="card-preview" (click)="onPreviewClicked($event)" *ngFor="let pokemon of pokemonData[0], let id = index">
+            <h2 id="{{id}}"> {{pokemon.name}}</h2>
+            <img  id="{{id}}"src="{{imageUrl}}{{id+1}}.png" class="image-preview" />
+        </section>
+    </section>  
+    <section id="btn-sections">
+        <button  id="btn-pokemon-collection" (click)="onCollectionClicked($event)">Collection</button>       
     </section>
-</section> 
+</main> 
 
   
