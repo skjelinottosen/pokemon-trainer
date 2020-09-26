@@ -17,8 +17,16 @@ export class DisplayPokemonsComponent implements OnInit {
   subscription: Subscription;
 
   constructor( private router: Router, private communicationService: CommunicationService, private pokemonService: PokemonService, private authService: AuthService) {
+    
+    // Checks is user is signed in
     if(!this.authService.isSignedIn()){ 
+      
+      // Redirects 
       this.redirect('./start-page');
+     
+      // Hides trainer section 
+      let trainerHeader = document.getElementById("trainer-section-header");
+      trainerHeader.style.display = "none";
     }
     else{
         
@@ -30,7 +38,6 @@ export class DisplayPokemonsComponent implements OnInit {
       
       // Updates imageUrl with the url for the images
       this.imageUrl = this.pokemonData[1]; 
-    
     
       // Subscribes to home component messages
       this.subscription = this.communicationService.onMessage().subscribe(message => {
