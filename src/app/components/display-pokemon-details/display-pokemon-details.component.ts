@@ -18,6 +18,7 @@ export class DisplayPokemonDetailsComponent implements OnInit {
   pokemonName = JSON.parse(localStorage.getItem("selectedPokemon")).name;
   imageUrl = localStorage.getItem("selectedPokemonImageUrl");
   pokemonDetails = localStorage.getItem("selectedPokemonDetails");
+  
 
   pokemonData: any[] = [];
   subscription: Subscription;
@@ -30,8 +31,15 @@ export class DisplayPokemonDetailsComponent implements OnInit {
     this.pokemon.id = JSON.parse(localStorage.getItem("selectedPokemonId"));
    
     // Gets pokemon collection from local storage
-    this.pokemonCollection.pokemons = JSON.parse(localStorage.getItem("pokemonCollection"));
+    let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection"));
 
+    // Checks if the collection is not null
+    if(pokemonCollection!==null){
+
+      // Stores data from the collection
+      this.pokemonCollection.pokemons =pokemonCollection;
+    }
+  
     // Gets the types
     for(let i= 0; i<this.pokemonDetails['types'].length; i++){
       this.pokemon.types[i] = this.pokemonDetails['types'][i]['type']['name'];
@@ -73,24 +81,33 @@ export class DisplayPokemonDetailsComponent implements OnInit {
     let pokemonCollected = [];
     pokemonCollected[0] = this.pokemonName;
     pokemonCollected[1] = this.imageUrl;
-    alert("You Caught " +this.pokemonName);
     
     // Pushes new pokemon to the pokemon collection
     this.pokemonCollection.pokemons.push(pokemonCollected);
 
     // Stores the updated collection to local storage
     localStorage.setItem("pokemonCollection",  JSON.stringify( this.pokemonCollection.pokemons));
+    alert("You Caught " +this.pokemonName);
   }
 
   onAllPokemonsClicked($event){
-    this.redirect();
-
+    this.redirectToPreview();
   }
 
-   // Method redirect to pokemon-details page
-   redirect() {
-    this.router.navigate(['./pokemons']);
+  onCollectionClicked($event){
+    this.redirectTocollection();
   }
+
+   // Method redirect to pokemon-previw page
+   redirectToPreview() {
+    this.router.navigate(['./preview']);
+  }
+
+  // Method redirect to pokemon-previw page
+  redirectTocollection() {
+    this.router.navigate(['./collection']);
+  }
+  
   ngOnInit(): void {
   
   }

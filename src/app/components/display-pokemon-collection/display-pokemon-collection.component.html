@@ -1,1 +1,9 @@
-<p>display-pokemon-collection works!</p>
+<main class="pokemon-collection-section">
+    <section  id="{{id}}" class="card-collection" *ngFor="let pokemon of pokemonData, let id = index">
+        <h2 id="{{id}}"> {{pokemon[0]}}</h2>
+        <img  id="{{id}}"src="{{pokemon[1]}}" class="image-collection" />
+    </section>
+    <section id="btn-sections">
+        <button  id="btn-all-pokemons" (click)="onAllPokemonsClicked($event)">All Pokémons</button>      
+    </section>     
+</main> 

@@ -3,7 +3,6 @@ import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommunicationService } from '../../services/CommunicationService/communication.service';
 import { PokemonService } from '../../services/API/pokemon.service';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-display-pokemons',
@@ -17,10 +16,10 @@ export class DisplayPokemonsComponent implements OnInit {
   subscription: Subscription;
 
   constructor( private router: Router, private communicationService: CommunicationService, private pokemonService: PokemonService) {
-     // Stores the pokemon data
+     // Gets the pokemon data from local storage
      this.pokemonData[0] = JSON.parse(localStorage.getItem("allPokemons"));
 
-     // Stores the url for the pokemon images
+     // Gets the pokemon data for local storage
      this.pokemonData[1] =  localStorage.getItem("pokemonImageUrl");
      
      // Updates imageUrl with the url for the images
@@ -72,7 +71,7 @@ export class DisplayPokemonsComponent implements OnInit {
   
   // Method redirect to pokemon-details page
   redirect() {
-        this.router.navigate(['./pokemon-details']);
+        this.router.navigate(['./details']);
   }
     
   ngOnInit(): void {
