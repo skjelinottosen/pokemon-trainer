@@ -8,5 +8,4 @@ export class Pokemon {
       weight:'';
       abilities=[];
       moves=[];
-  
-  }
+}
