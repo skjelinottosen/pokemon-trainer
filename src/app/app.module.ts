@@ -27,7 +27,7 @@ import { DisplayPokemonCollectionComponent } from './components/display-pokemon-
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

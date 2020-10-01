@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { AuthService } from '../../services/Auth/auth.service'
+import { getStorage, setStorage } from '../../services/Utils/storage-utils';
 
 @Component({
   selector: 'app-display-pokemon-collection',
@@ -18,11 +19,11 @@ export class DisplayPokemonCollectionComponent implements OnInit {
     }
     else{
         // Stores the pokemon data
-        this.pokemonData = JSON.parse(localStorage.getItem("pokemonCollection"));
+        this.pokemonData = getStorage("pokemonCollection");
     }
-   }
+  }
 
-   onAllPokemonsClicked($event){
+   onBtnAllPokemonsClicked($event){
     this.redirectToPreview();
   }
 

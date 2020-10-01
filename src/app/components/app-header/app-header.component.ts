@@ -7,8 +7,9 @@ import { Component, OnInit, Input} from '@angular/core';
 })
 export class AppHeaderComponent implements OnInit {
 
-  @Input('trainerId') public id;
-  @Input('trainerName') public name;
+  // Data from app component
+  @Input('id') public id;
+  @Input('name') public name;
   
   constructor() { }
 

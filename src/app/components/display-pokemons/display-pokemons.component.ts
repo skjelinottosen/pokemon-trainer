@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CommunicationService } from '../../services/CommunicationService/communication.service';
 import { AuthService } from '../../services/Auth/auth.service'
 import { PokemonService } from '../../services/API/pokemon.service';
+import { getStorage, setStorage } from '../../services/Utils/storage-utils';
 
 @Component({
   selector: 'app-display-pokemons',
@@ -16,7 +16,7 @@ export class DisplayPokemonsComponent implements OnInit {
   pokemonData: any[] = [];
   subscription: Subscription;
 
-  constructor( private router: Router, private communicationService: CommunicationService, private pokemonService: PokemonService, private authService: AuthService) {
+  constructor( private router: Router, private pokemonService: PokemonService, private authService: AuthService) {
     
     // Checks is user is signed in
     if(!this.authService.isSignedIn()){ 
@@ -24,69 +24,46 @@ export class DisplayPokemonsComponent implements OnInit {
       // Redirects 
       this.redirect('./start-page');
      
-      // Hides trainer section 
+      // Hides the trainer section 
       let trainerHeader = document.getElementById("trainer-section-header");
       trainerHeader.style.display = "none";
     }
     else{
-        
+      // Displays the trainer section 
+      let trainerHeader = document.getElementById("trainer-section-header");
+      trainerHeader.style.display = "block";
+  
       // Gets the pokemon data from local storage
-      this.pokemonData[0] = JSON.parse(localStorage.getItem("allPokemons"));
+      this.pokemonData[0] = getStorage("allPokemons");
 
-      // Gets the pokemon data for local storage
-      this.pokemonData[1] =  localStorage.getItem("pokemonImageUrl");
-      
+       // Get the image base url
+      this.pokemonData[1] = this.getPokemonImageUrl();
+
       // Updates imageUrl with the url for the images
       this.imageUrl = this.pokemonData[1]; 
     
-      // Subscribes to home component messages
-      this.subscription = this.communicationService.onMessage().subscribe(message => {
-        if (message) {
-          // Stores the trainer id and name in local storage
-          localStorage.setItem("allPokemons", JSON.stringify(message.text[0]));
-          localStorage.setItem("pokemonImageUrl",  message.text[1]);   
-          
-        } else {
-            // Clear messages when empty message received
-            this.pokemonData = [];
-        }
-      });
     }   
   }
 
+  // Gets base url for the images
+  getPokemonImageUrl() : String {
+    return this.pokemonService.getPokemonImageUrl()
+  }
+
   onPreviewClicked(event){
-    // Gets selecet pokemon id
+    // Gets selected pokemon id
     const selectedPokemonId = event.target.id;
-
+    // Corrects to match api id
     const pokemonId = parseInt(selectedPokemonId,10)+ 1;
-
-    // Stores pokemon id in local storage
-    localStorage.setItem("selectedPokemonId", JSON.stringify(pokemonId));
-
-    // Get selected pokemon from local storage
-    const allPokemons = JSON.parse(localStorage.getItem("allPokemons"));
-    
-    // Stores selected pokemon in local storage
-    localStorage.setItem("selectedPokemon", JSON.stringify(allPokemons[selectedPokemonId]));
-
-    // Stores selected pokemon image url  in local storage
-    localStorage.setItem("selectedPokemonImageUrl",  this.imageUrl+pokemonId +".png");
-
-    this.pokemonService.getPokemonById(pokemonId).subscribe((result) => {
-    
+    // Gets pokemon by id
+    this.pokemonService.getPokemonById(pokemonId).subscribe((result) => { 
       // Stores selected pokemon details in local storage
-      localStorage.setItem("selectedPokemonDetails", JSON.stringify(result));
+      setStorage('selectedPokemon', result);
+      this.router.navigateByUrl(`/details/${pokemonId}`)
     });
-           
-    // Redirects to pokemon-details page
-    this.redirect('./details');
-    
-  }
-  onAllPokemonsClicked($event){
-    this.redirect('./preview');
   }
 
-  onCollectionClicked($event){
+  onBtnCollectionClicked($event){
     this.redirect('./collection');
   }
   

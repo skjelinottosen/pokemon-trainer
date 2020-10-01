@@ -10,7 +10,7 @@ import { DisplayPokemonCollectionComponent } from './components/display-pokemon-
 const routes: Routes = [
   {path: 'start-page', component: AppStartPageComponent },
   {path: 'preview', component: DisplayPokemonsComponent },
-  {path: 'details', component: DisplayPokemonDetailsComponent },
+  {path: 'details/:id', component: DisplayPokemonDetailsComponent },
   {path: 'collection', component: DisplayPokemonCollectionComponent },
   {path: '', redirectTo: 'start-page', pathMatch: 'full' }
 ];

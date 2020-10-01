@@ -1,10 +1,13 @@
 import { Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CommunicationService } from '../../services/CommunicationService/communication.service';
 import { AuthService } from '../../services/Auth/auth.service'
+import { PokemonService } from '../../services/API/pokemon.service';
 import { Pokemon } from '../../models/pokemon';
 import { PokemonCollection } from '../../models/pokemonCollection';
+import { getStorage, setStorage } from '../../services/Utils/storage-utils';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-display-pokemon-details',
@@ -15,49 +18,39 @@ export class DisplayPokemonDetailsComponent implements OnInit {
 
   public pokemon = new Pokemon();
   public pokemonCollection = new PokemonCollection();
-
-  pokemonName = JSON.parse(localStorage.getItem("selectedPokemon")).name;
-  imageUrl = localStorage.getItem("selectedPokemonImageUrl");
-  pokemonDetails = localStorage.getItem("selectedPokemonDetails");
-  
-
   pokemonData: any[] = [];
+  pokemonDetails: object[] = getStorage("selectedPokemon");
   subscription: Subscription;
   loaded = false;
 
-  constructor( private router: Router, private communicationService: CommunicationService, private authService: AuthService) {
-    
+  constructor( private router: Router,private route: ActivatedRoute, private communicationService: CommunicationService, private authService: AuthService, private pokemonService: PokemonService) {
+    //Redirects to start page if not logged in
     if(!this.authService.isSignedIn()){ 
       this.redirect('./start-page');
     }
-    else{
-    // Stores pokemon detail data respone from local storages
-    this.pokemonDetails = JSON.parse(localStorage.getItem("selectedPokemonDetails"));
-    this.pokemon.id = JSON.parse(localStorage.getItem("selectedPokemonId"));
-   
-    // Gets pokemon collection from local storage
-    let pokemonCollection = JSON.parse(localStorage.getItem("pokemonCollection"));
+    else{  
+    // Gets id from url paramater
+    this.pokemon.id = this.route.snapshot.params.id;
+    //Gets pokemon by id
+    this.pokemonService.getPokemonById(this.pokemon.id);
 
-    // Checks if the collection is not null
-    if(pokemonCollection!==null){
-
-      // Stores data from the collection
-      this.pokemonCollection.pokemons =pokemonCollection;
-    }
-  
+    // Gets the name 
+    this.pokemon.name = this.pokemonDetails['forms'][0]['name'];
+     
+    // Gets the image url
+    this.pokemon.imageUrl =`${this.getPokemonImageUrl()}${this.pokemon.id}.png`;
+    
     // Gets the types
     for(let i= 0; i<this.pokemonDetails['types'].length; i++){
       this.pokemon.types[i] = this.pokemonDetails['types'][i]['type']['name'];
     }
-    
-    this.pokemon.imageUrl = localStorage.getItem('selectedPokemonImageUrl');
    
     // Gets the height
     this.pokemon.height = this.pokemonDetails['height'];
     
     // Gets the weight 
     this.pokemon.weight = this.pokemonDetails['weight'];
-    
+   
     // Gets the abilities
     for(let i= 0; i<this.pokemonDetails['abilities'].length; i++){
       this.pokemon.abilities[i] = this.pokemonDetails['abilities'][i]['ability']['name'];      
@@ -72,35 +65,45 @@ export class DisplayPokemonDetailsComponent implements OnInit {
     this.subscription = this.communicationService.onMessage().subscribe(message => {
       if (message) {      
       // Stores Pokemon detail data in local storage
-        localStorage.setItem("pokemonDetailsUrl",  message.text[2]);
+      setStorage("pokemonDetailsUrl",  message.text[2])
         } else {
           // Clear messages when empty message received
           this.pokemonData = [];
         }
       });
-    }
+    }   
   }
 
-   onCatchClicked(event){
+  // Gets image by url
+  getPokemonImageUrl() : String {
+    return this.pokemonService.getPokemonImageUrl()
+  }
 
+   onBtnCatchClicked(event){
+
+    if( getStorage("pokemonCollection") != null){
+      this.pokemonCollection.pokemons = getStorage("pokemonCollection"); 
+    }
+   
+    
     // Helper array for the collection
     let pokemonCollected = [];
-    pokemonCollected[0] = this.pokemonName;
-    pokemonCollected[1] = this.imageUrl;
+    pokemonCollected[0] = this.pokemon.name;
+    pokemonCollected[1] = this.pokemon.imageUrl;
     
     // Pushes new pokemon to the pokemon collection
     this.pokemonCollection.pokemons.push(pokemonCollected);
 
     // Stores the updated collection to local storage
-    localStorage.setItem("pokemonCollection",  JSON.stringify( this.pokemonCollection.pokemons));
-    alert("You Caught " +this.pokemonName);
+    setStorage("pokemonCollection",  this.pokemonCollection.pokemons);
+    alert("You Caught " +this.pokemon.name.charAt(0).toUpperCase() + this.pokemon.name.slice(1));
   }
 
-  onAllPokemonsClicked($event){
+  onBtnAllPokemonsClicked($event){
     this.redirect('./preview');
   }
 
-  onCollectionClicked($event){
+  onBtnCollectionClicked($event){
     this.redirect('./collection');
   }
 

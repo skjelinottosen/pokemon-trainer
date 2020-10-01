@@ -4,8 +4,8 @@
             <h2> A wild Pokémon</h2>  
             <ul>    
                 <li>
-                    <img  src="{{imageUrl}}" class="image-details" />   
-                    <button  id="btn-catch" (click)="onCatchClicked($event)">Catch</button>      
+                    <img  src="{{pokemon.imageUrl}}" class="image-details" />   
+                    <button  id="btn-catch" (click)="onBtnCatchClicked($event)">Catch</button>      
                 </li>
             </ul>
         </section>
@@ -18,7 +18,7 @@
                 </li> 
                 <li>
                     <h3>Name</h3>
-                    <p>{{pokemonName}}</p>
+                    <p>{{pokemon.name}}</p>
                 </li>       
                 <li *ngFor="let type of pokemon.types">
                     <h3>Types</h3>
@@ -55,7 +55,7 @@
         </section>
     </section>
     <section id="btn-sections">
-        <button  id="btn-all-pokemons" (click)="onAllPokemonsClicked($event)">All Pokémons</button> 
-        <button  id="btn-pokemon-collection" (click)="onCollectionClicked($event)">Collection</button>       
+        <button  id="btn-all-pokemons" (click)="onBtnAllPokemonsClicked($event)">All Pokémons</button> 
+        <button  id="btn-pokemon-collection" (click)="onBtnCollectionClicked($event)">Collection</button>       
     </section>
 </main>
